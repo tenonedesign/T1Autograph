@@ -30,6 +30,7 @@
 @optional
 - (void)autographDidCancelModalView:(T1Autograph *)autograph;			// user canceled autograph modal view
 - (void)autographDidCompleteWithNoSignature:(T1Autograph *)autograph;	// user pressed the done button without signing
+- (void)autograph:(T1Autograph *)autograph willCompleteWithSignature:(T1Signature *)signature;   // early access to signature from modal view before animation completes
 - (void)autograph:(T1Autograph *)autograph didCompleteWithSignature:(T1Signature *)signature;   // signature was successful
 - (void)autograph:(T1Autograph *)autograph didEndLineWithSignaturePointCount:(NSUInteger)count; // Called when a signature stroke has ended. Can be used to toggle state of clear/undo/done UI in your own custom view.
 @end
@@ -58,7 +59,7 @@
 #pragma mark - Methods
 
 /**
- @brief Pops a built-in modal view to accept a signature
+ @brief Displays a built-in modal view to accept a signature
  @param delegate Object designated to receive messages declared in the T1AutographDelegate protocol
  @param displayString String to display in the modal view when accepting a signature
  @return A reference to a newly created T1Autograph object.
