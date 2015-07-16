@@ -17,8 +17,7 @@
 @property (strong, nonatomic) NSArray *rawPoints;		// array of strokes, each containing an array of data
 
 // A note about rawPoints:
-// Each point is a CGRect {{x,y},{stroke width, unique identifier}}.
-// Location data in rawPoints includes no smoothing.  Each point is relative to enclosing view.
-// Also note rawPoints is not clipped to the enclosing view and may therefore be located outside of it.
+// It contains an NSArray of strokes, where each stroke is an NSArray of T1SignaturePoints.
+// Location data stored in T1SignaturePoint.location contains no smoothing. Each point location is relative to its enclosing view.
 
 @end

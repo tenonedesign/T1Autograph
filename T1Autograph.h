@@ -1,8 +1,8 @@
 /*	Usage Instructions:
  
- Drag the T1Autograph folder into your XCode project.  Make sure you link to CoreGraphics.framework.
+ Drag the T1Autograph folder into your XCode project.  Make sure you link to CoreGraphics.framework, and your library search path can find libT1Autograph.a
  
- 1) #import "T1Autograph.h" in your view controller, then add <T1AutographDelegate> to your .h file after the superclass name.
+ 1) #import "T1Autograph.h" in your view controller .h file, then add <T1AutographDelegate> after the superclass name.
  
  2) Use one of the two class methods to obtain a signature.
  - The easiest way (with a modal window) is by calling [T1Autograph autographWithDelegate:self modalDisplayString:nil];
