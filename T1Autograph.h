@@ -1,18 +1,21 @@
-/*	Usage Instructions:
+/*	Objective C Usage Instructions (Swift is similar):
  
- Drag the T1Autograph folder into your XCode project.  Make sure you link to CoreGraphics.framework, and your library search path can find libT1Autograph.a
  
- 1) #import "T1Autograph.h" in your view controller .h file, then add <T1AutographDelegate> after the superclass name.
+ 1) Go to the "General" tab of your XCode project and drag the T1Autograph framework into the Embedded Binaries section.
  
- 2) Use one of the two class methods to obtain a signature.
- - The easiest way (with a modal window) is by calling [T1Autograph autographWithDelegate:self modalDisplayString:nil];
- - To obtain a signature from your choice of UIView, call [T1Autograph autographWithView:myUIView delegate:self];
+ 2) @import T1Autograph; in your view controller .h file, then add <T1AutographDelegate> after the superclass name. In swift, import T1Autograph
  
- 3) Implement autograph:didCompleteWithSignature: in your view controller.  The T1Signature object you'll receive is defined in T1Signature.h.
+ 3) add @property (strong) T1Autograph *autograph; to your interface (objC only)
  
- 4) Once it's working for you, you can remove the watermark.  Use [autographInstance setLicenseCode:@"your40digitlicensecode"]; Purchase @"your40digitlicensecode" at http://tenonedesign.com/t1autograph
+ 4) Use one of the two class methods to obtain a signature.
+ - The easiest way (with a modal window) is by calling self.autograph = [T1Autograph autographWithDelegate:self modalDisplayString:nil];
+ - To obtain a signature from your choice of UIView, call self.autograph = [T1Autograph autographWithView:myUIView delegate:self];
  
- For more usage info and examples, delve into the T1Autograph demo project.
+ 5) Implement autograph:didCompleteWithSignature: in your view controller.  The T1Signature object you’ll receive is defined in T1Signature.h.
+ 
+ 6) Once it’s working for you, you can remove the watermark.  Use [autographInstance setLicenseCode:@"your40digitlicensecode"]; Purchase @"your40digitlicensecode" at http://tenonedesign.com/t1autograph
+ 
+ For more usage info and examples, delve into the ObjC or Swift T1Autograph demo project.
  Support requests may be emailed to devs@tenonedesign.com
  Follow @tenonedesign for library update notifications
  
@@ -21,6 +24,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "T1Signature.h"
+#import "T1SignaturePoint.h"
 @class T1Autograph;
 
 
@@ -46,13 +50,14 @@
 @property (strong, nonatomic) UIColor *strokeColor;		// defaults to black
 @property (assign, nonatomic) float strokeWidth;		// starting line width. defaults to 6.0f
 @property (assign, nonatomic) float velocityReduction;	// amount the line narrows with pen speed.  defaults to 0.85f
-@property (assign, nonatomic) BOOL swipeToUndoEnabled;	// defaults to YES
+@property (assign, nonatomic) BOOL swipeToUndoEnabled;	// 3-finger swipe.  defaults to YES
 @property (assign, nonatomic) BOOL showDate;			// defaults to NO
 @property (assign, nonatomic) BOOL showHash;			// defaults to NO
 @property (strong, nonatomic) NSString *customHash;		// custom hash or string you'd like.  If nil, will use a random hash.
 @property (assign, nonatomic) float exportScale;		// defaults to 1.0f
 @property (assign, nonatomic) BOOL clipSignatureToBounds;	// force signature to same dimensions as the enclosing view
-@property (assign, readonly) NSUInteger buildNumber;	// good to know if you have a support request
+@property (assign, nonatomic) BOOL drawOnlyWithApplePencil;	// prevent all fingers from drawing. defaults to NO
+@property (assign, readonly) NSUInteger buildNumber;	// good to include if you have a support request
 
 
 
